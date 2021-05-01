@@ -1,47 +1,14 @@
 import React, {useState} from 'react';
+import Button from './components/button/Button';
+import Mensagens from './components/mensagems/Mensagens';
 
 
 
 
 function App() {
-  
-   const [todasAsMensagens, setTodasAsMensagens] = useState([]);
-
-   const [mensagens, setMensagens] = useState("");
-
-   const [usuario, setUsuario] = useState("");
-
-   function showMessage ( ) {
-     setTodasAsMensagens([...todasAsMensagens,{mensagens,usuario}])    
-   }
-
-   function inputMensagem (send) {
-    setMensagens(send.target.value)
-   }
-
-   function inputUsuario (nome) {
-     setUsuario(nome.target.value)
-   }
-
-return (
-  <div>
-    {todasAsMensagens.map((msg, index)=>{
-      return ( 
-      <div key={index}>
-        <p >{msg.mensagens}</p>
-                
-        <p >{msg.usuario}</p>
-      </div>
-      )
-    })}
-    <input type="text" onChange={inputMensagem} ></input>
-    <input type="text" onChange={inputUsuario} placeholder="Nome Usuário"></input>
-    <button onClick={showMessage}>
-      Click me
-    </button>
-  </div>
-
-  );
+  return ( 
+    <Mensagens/> 
+  )
 }
 
 export default App;
