@@ -4,10 +4,12 @@ import logout from '../../img/logout1.svg'
 import {
     DivMaster, 
     DivLogout, 
-    DivConteudo,
     DivInputMenssagem,
+    DivInputUsuario,
+    Logout,
 } from './style';
 import InputMensagens from '../inputMensagens/InputMensagens';
+import BalaoDialogo from '../balaoDialogo/BalaoDialogo';
 
 
 const Mensagens = () => {
@@ -18,8 +20,16 @@ const Mensagens = () => {
 
    const [usuario, setUsuario] = useState("Fulano");
 
+   const [temUsuario, setTemUsuario] = useState(false);
+
+   function temosUmUsuario () {
+    setTemUsuario(!temUsuario)
+   }
+
    function showMessage ( ) {
-     setTodasAsMensagens([...todasAsMensagens,{mensagens,usuario}])    
+     setTodasAsMensagens([...todasAsMensagens,{mensagens,usuario}])
+     const limpaCampo = document.getElementsByClassName("InputMensagem") 
+     limpaCampo.value=""  
    }
 
    function inputMensagem (send) {
@@ -30,33 +40,52 @@ const Mensagens = () => {
      setUsuario(nome.target.value)
    }
 
+   function apertandoEnter (e) {
+     if (e.key==="Enter") {
+       showMessage()
+     }
+
+   }
+
+   function apertandoEnterDoUsuario (e) {
+    if (e.key==="Enter") {
+      temosUmUsuario()
+      
+    }
+  }
+    
+
 return (
   <DivMaster>
-      <DivLogout>
-          <img src={logout}></img>
-      </DivLogout>
-    <DivConteudo>  
-        {todasAsMensagens.map((msg, index)=>{
-        return ( 
-           
-            <div key={index}>
-                <p >{msg.mensagens}</p>
-                        
-                <p >{msg.usuario}</p>
-            </div>
-        
 
-        )
-        })}
-    </DivConteudo>
+    {temUsuario ?
+    <>
+      <DivLogout>
+          <Logout src={logout} onClick={temosUmUsuario}></Logout>
+      </DivLogout>
+        <BalaoDialogo todasAsMensagens= {todasAsMensagens} usuarioDoMomento={usuario} ></BalaoDialogo>
     <DivInputMenssagem>
-        {/* <input type="text" onChange={inputMensagem} ></input>  */}
-        <InputMensagens placeholder="Digite sua Mensagem" fnc={inputMensagem}></InputMensagens>
+        <InputMensagens 
+        placeholder="Digite sua Mensagem"
+        className="InputMensagem" 
+        fnc={inputMensagem}
+        pressEnter={apertandoEnter}
+        />
         <Button botao="Enviar" fnc={showMessage} />
     </DivInputMenssagem>
-    
-  </DivMaster>
-
+    </> 
+    :
+    <DivInputUsuario>
+    <InputMensagens 
+    placeholder="Digite seu nome de Usuário ... " 
+    fnc={inputUsuario}
+    pressEnter={apertandoEnterDoUsuario}
+    />
+    <Button botao="Entrar" fnc={temosUmUsuario}></Button>
+    </DivInputUsuario>
+  
+  }
+</DivMaster>
 
   );
 

@@ -5,7 +5,7 @@ import {InputMensagensUsuario} from './style'
 const InputMensagens = (props) => {
 
     return (
-        <InputMensagensUsuario placeholder={props.placeholder} type="text" onChange={props.fnc} ></InputMensagensUsuario>
+        <InputMensagensUsuario placeholder={props.placeholder} type="text" onChange={props.fnc} onKeyDown={props.pressEnter} ></InputMensagensUsuario>
     )
 }
 
