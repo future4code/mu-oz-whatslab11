@@ -9,6 +9,9 @@ body {
     box-sizing:border-box;
     font-family: 'Roboto Mono', monospace;
     color:#3ADFCE;
+    width:100vw;
+    height:100vh;
+    
 }
 `
 export default GlobalStyle

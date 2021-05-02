@@ -13,6 +13,7 @@ export const DivMaster = styled.div`
     background-color:${BackColor};
     height:100vh;
     max-width:648px;
+    margin:0 auto;
 
 `
 
@@ -24,31 +25,38 @@ export const DivLogout = styled.div`
     width:100%;
     background-color:${BackColor2};
     height:80px;
+`
 
+export const Logout = styled.img`
+
+    padding-right:14px;
 
 `
 
-export const DivConteudo = styled.div`
-   
-   display:flex;
-   justify-content:flex-end;
-   align-items:center;
-   flex-direction:column;
-   flex-grow:1;
-   height:100%;
-
-
-`
 
 export const DivInputMenssagem = styled.div`
 
     display:flex;
-    justify-content:space-between;
+    justify-content:space-around;
     align-items:center;
     background-color:#2D2B2B;
     width:100%;
+    max-width:648px;
     height:80px;
-    padding: 0px 14px;
+   
 
+`
+
+export const DivInputUsuario = styled.div`
+
+    width: 566px;
+    height: 188px;
+    background: #2E2E2E;
+    border-radius: 5px;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    flex-direction:column;
+    
 `
 
