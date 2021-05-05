@@ -1,11 +1,24 @@
-import React, {useState} from 'react'
-import {InputMensagensUsuario} from './style'
+import React from 'react'
+import { InputMensagensUsuario } from './style'
 
 
 const InputMensagens = (props) => {
 
+    const {
+        placeholder,
+        pressEnter,
+        functionParaOInput,
+        valueInput
+    } = props
+
     return (
-        <InputMensagensUsuario placeholder={props.placeholder} type="text" onChange={props.fnc} onKeyDown={props.pressEnter} ></InputMensagensUsuario>
+        <InputMensagensUsuario
+            placeholder={placeholder}
+            type="text"
+            onChange={functionParaOInput}
+            onKeyDown={pressEnter}
+            value={valueInput}
+        />
     )
 }
 

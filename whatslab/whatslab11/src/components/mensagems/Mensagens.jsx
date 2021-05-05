@@ -1,94 +1,87 @@
-import React, {useState} from 'react';
-import Button from '../button/Button';
-import logout from '../../img/logout1.svg'
-import {
-    DivMaster, 
-    DivLogout, 
-    DivInputMenssagem,
-    DivInputUsuario,
-    Logout,
-} from './style';
-import InputMensagens from '../inputMensagens/InputMensagens';
-import BalaoDialogo from '../balaoDialogo/BalaoDialogo';
+import React, { useState } from 'react';
 
+import MensagemPage from '../../pages/MensagemPage'
+import Login from '../../pages/Login';
+
+import { DivMaster } from './style';
 
 const Mensagens = () => {
-    
-   const [todasAsMensagens, setTodasAsMensagens] = useState([]);
 
-   const [mensagens, setMensagens] = useState("");
+  const [todasAsMensagens, setTodasAsMensagens] = useState([]);
+  const [mensagens, setMensagens] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [temUsuario, setTemUsuario] = useState(false);
 
-   const [usuario, setUsuario] = useState("Fulano");
+  // --------------------------------------------------------------
+  // Salvar o estado das mensagens e do usuario
+  // --------------------------------------------------------------
+  const inputMensagem = (e) => setMensagens(e.target.value)
+  const inputUsuario = (e) => setUsuario(e.target.value)
+  // --------------------------------------------------------------
 
-   const [temUsuario, setTemUsuario] = useState(false);
 
-   function temosUmUsuario () {
+  // -----------------------------------------------------------------
+  // Mudar o estado do usuario. se for true aparece um
+  // Componente, se for falso aparece outro
+  // -----------------------------------------------------------------
+  const logarEDeslogarUsuario = () => {
     setTemUsuario(!temUsuario)
-   }
-
-   function showMessage ( ) {
-     setTodasAsMensagens([...todasAsMensagens,{mensagens,usuario}])
-     const limpaCampo = document.getElementsByClassName("InputMensagem") 
-     limpaCampo.value=""  
-   }
-
-   function inputMensagem (send) {
-    setMensagens(send.target.value)
-   }
-
-   function inputUsuario (nome) {
-     setUsuario(nome.target.value)
-   }
-
-   function apertandoEnter (e) {
-     if (e.key==="Enter") {
-       showMessage()
-     }
-
-   }
-
-   function apertandoEnterDoUsuario (e) {
-    if (e.key==="Enter") {
-      temosUmUsuario()
-      
-    }
+    if (temUsuario) setUsuario('')
   }
-    
-
-return (
-  <DivMaster>
-
-    {temUsuario ?
-    <>
-      <DivLogout>
-          <Logout src={logout} onClick={temosUmUsuario}></Logout>
-      </DivLogout>
-        <BalaoDialogo todasAsMensagens= {todasAsMensagens} usuarioDoMomento={usuario} ></BalaoDialogo>
-    <DivInputMenssagem>
-        <InputMensagens 
-        placeholder="Digite sua Mensagem"
-        className="InputMensagem" 
-        fnc={inputMensagem}
-        pressEnter={apertandoEnter}
-        />
-        <Button botao="Enviar" fnc={showMessage} />
-    </DivInputMenssagem>
-    </> 
-    :
-    <DivInputUsuario>
-    <InputMensagens 
-    placeholder="Digite seu nome de Usuário ... " 
-    fnc={inputUsuario}
-    pressEnter={apertandoEnterDoUsuario}
-    />
-    <Button botao="Entrar" fnc={temosUmUsuario}></Button>
-    </DivInputUsuario>
+  // -----------------------------------------------------------------
   
+
+  // -------------------------------------------------------------------
+  // Pergar todas as mensagens do array, e adcionar mais
+  // Uma e limpar o campo do input
+  // -------------------------------------------------------------------
+  const showMessage = () => {
+    setTodasAsMensagens([...todasAsMensagens, { mensagens, usuario }])
+    setMensagens('')
   }
-</DivMaster>
+  // -------------------------------------------------------------------
 
+
+  // -------------------------------------------------------------------
+  // Chamar uma função ao apertar enter
+  // -------------------------------------------------------------------
+  const apertandoEnter = (e) => {
+    if (e.key === "Enter") showMessage()
+  }
+
+  const apertandoEnterDoUsuario = (e) => {
+    if (e.key === "Enter") logarEDeslogarUsuario()
+  }
+  // -------------------------------------------------------------------
+
+
+  return (
+    <DivMaster>
+
+      {temUsuario ?
+
+        <MensagemPage
+          logarEDeslogarUsuario={logarEDeslogarUsuario}
+          todasAsMensagens={todasAsMensagens}
+          usuarioDoMomento={usuario} //Mudar isso aqui depois
+          functionParaOInput={inputMensagem}
+          pressEnter={apertandoEnter}
+          enviarMensagem={showMessage}
+          valueInput={mensagens}
+          usuario={usuario}
+        />
+
+        :
+        
+        <Login
+          pressEnter={apertandoEnterDoUsuario}
+          functionParaOInput={inputUsuario}
+          valueInput={usuario}
+          enviarMensagem={logarEDeslogarUsuario}
+        />
+      }
+    </DivMaster>
   );
-
 }
 
 export default Mensagens

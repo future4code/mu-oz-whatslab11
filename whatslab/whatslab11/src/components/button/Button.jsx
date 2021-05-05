@@ -2,10 +2,8 @@ import React from 'react';
 import {Botao} from './style'
 
 const Button = (props) => {
-
-    return (
-        <Botao onClick={props.fnc}>{props.botao}</Botao>
-    )
+    const {enviarMensagem, botao} = props
+    return <Botao onClick={enviarMensagem}>{botao}</Botao>
 }
 
 export default Button

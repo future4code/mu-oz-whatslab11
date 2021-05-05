@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const InputMensagensUsuario = styled.input`
-
 font-family: Roboto Mono;
 font-style: normal;
 font-weight: normal;
