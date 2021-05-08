@@ -18,12 +18,12 @@ const LoginPage = (props) => {
     const {
         logarEDeslogarUsuario,
         todasAsMensagens,
-        usuarioDoMomento,
         functionParaOInput,
         pressEnter,
         enviarMensagem,
         valueInput,
-        usuario
+        usuario,
+        deletarMensagem
     } = props
 
     return (
@@ -34,6 +34,7 @@ const LoginPage = (props) => {
             <BalaoDialogo 
                 todasAsMensagens={todasAsMensagens}     
                 usuario={usuario} 
+                deletarMensagem={deletarMensagem}
             />
             <DivInputMenssagem>
                 <InputMensagens

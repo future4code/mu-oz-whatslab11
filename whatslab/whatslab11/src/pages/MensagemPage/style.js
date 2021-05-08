@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const BackColor = '#292828'
+
 
 const BackColor2 = '#2D2B2B'
 
@@ -17,6 +17,7 @@ export const DivLogout = styled.div`
 
 export const Logout = styled.img`
     padding-right:14px;
+    cursor: pointer;
 `
 
 export const DivInputMenssagem = styled.div`

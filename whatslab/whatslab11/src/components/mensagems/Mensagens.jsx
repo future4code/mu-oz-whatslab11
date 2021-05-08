@@ -25,11 +25,15 @@ const Mensagens = () => {
   // Componente, se for falso aparece outro
   // -----------------------------------------------------------------
   const logarEDeslogarUsuario = () => {
-    setTemUsuario(!temUsuario)
-    if (temUsuario) setUsuario('')
+    if(usuario.length >= 2){
+      setTemUsuario(!temUsuario)
+      if (temUsuario) setUsuario('')
+    }else{
+      alert('Por Favor digite 2 ou mais digitos como nome de usuario')
+    }
   }
   // -----------------------------------------------------------------
-  
+
 
   // -------------------------------------------------------------------
   // Pergar todas as mensagens do array, e adcionar mais
@@ -54,6 +58,20 @@ const Mensagens = () => {
   }
   // -------------------------------------------------------------------
 
+  // -------------------------------------------------------------------
+  // Deletar Mensagem
+  // -------------------------------------------------------------------
+  const deletarMensagem = (dadosDaMensagem) => {
+    if (window.confirm("Tem certeza que deseja Apagar esta mensagem")) {
+      console.log(dadosDaMensagem)
+      let copiaDoArray = todasAsMensagens.filter((item, index) => {
+        if (index !== dadosDaMensagem) return true
+      })
+      setTodasAsMensagens([...copiaDoArray])
+    }
+  }
+  // -------------------------------------------------------------------
+
 
   return (
     <DivMaster>
@@ -69,10 +87,12 @@ const Mensagens = () => {
           enviarMensagem={showMessage}
           valueInput={mensagens}
           usuario={usuario}
+          deletarMensagem={deletarMensagem}
         />
 
+
         :
-        
+
         <Login
           pressEnter={apertandoEnterDoUsuario}
           functionParaOInput={inputUsuario}
